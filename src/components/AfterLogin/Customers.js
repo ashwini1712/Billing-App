@@ -53,7 +53,7 @@ const Customers = () => {
                 <td>
                   <div
                     style={{
-                      justifyContent: "space-between",
+                      justifyContent: "space-around",
                       alignItems: "center",
                     }}
                   >

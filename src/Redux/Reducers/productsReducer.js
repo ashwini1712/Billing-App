@@ -2,11 +2,11 @@ const intialLoginState = [];
 
 const productsReducer = (state = intialLoginState, action) => {
   switch (action.type) {
-    case "CUSTOMERS_DATA": {
-      return [...state, ...action.payload];
+    case "PRODUCTS_DATA": {
+      return [...action.payload];
     }
-    case "ADDING_CUSTOMERS": {
-      return [...state, ...action.payload];
+    case "ADDING_PRODUCTS": {
+      return [action.payload, ...state];
     }
     default: {
       return state;

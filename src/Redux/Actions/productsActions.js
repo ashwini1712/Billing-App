@@ -38,6 +38,7 @@ export const startPostingProducts = (prodData) => {
       .post("http://dct-billing-app.herokuapp.com/api/products", prodData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "content-Type": "application/json",
         },
       })
       .then((response) => {

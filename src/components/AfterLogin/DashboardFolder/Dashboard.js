@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { startGettingCustomers } from "../../../Redux/Actions/customersAction";
+import { startGettingProducts } from "../../../Redux/Actions/productsActions";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -9,9 +10,14 @@ const Dashboard = () => {
     return state.customers;
   });
 
+  const products = useSelector((state) => {
+    return state.products;
+  });
+
   useEffect(() => {
     dispatch(startGettingCustomers());
-  }, [dispatch]);
+    dispatch(startGettingProducts());
+  }, []);
 
   return (
     <div>
@@ -60,7 +66,7 @@ const Dashboard = () => {
             Total Products
           </div>
           <div>
-            <h1>{customers.length}</h1>
+            <h1>{products.length}</h1>
           </div>
         </div>
         <div
