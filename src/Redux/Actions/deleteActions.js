@@ -36,3 +36,20 @@ export const startProdDelete = (data) => {
       });
   };
 };
+
+export const startBillDelete = (data) => {
+  return (dispatch) => {
+    axios
+      .delete(`http://dct-billing-app.herokuapp.com/api/bills/${data._id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  };
+};

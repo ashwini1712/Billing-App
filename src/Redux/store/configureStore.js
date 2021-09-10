@@ -1,5 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
+import billsReducers from "../Reducers/billsReducer";
 import customersReducers from "../Reducers/customerReducer";
 import productsReducer from "../Reducers/productsReducer";
 import userLogReducer from "../Reducers/userLogReducer";
@@ -7,6 +8,7 @@ import userLogReducer from "../Reducers/userLogReducer";
 const configureStore = () => {
   const store = createStore(
     combineReducers({
+      bills: billsReducers,
       customers: customersReducers,
       products: productsReducer,
       logStatus: userLogReducer,
