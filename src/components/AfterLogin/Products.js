@@ -11,7 +11,6 @@ const Products = () => {
     return state.products;
   });
 
-  console.log(products);
 
   const handleDelete = (ele) => {
     const result = window.confirm("Are you sure");
@@ -43,7 +42,6 @@ const Products = () => {
           </tr>
         </thead>
         {products.map((ele, i) => {
-          console.log(ele);
           return (
             <tbody key={ele._id}>
               <tr>
@@ -79,9 +77,7 @@ const Products = () => {
           );
         })}
       </table>
-      {prodModal ? (
-        <ModalView name="Name" mobile="Mobile" email="Email" />
-      ) : null}
+      {prodModal ? <ModalView prodModal={prodModal} /> : null}
     </div>
   );
 };

@@ -5,11 +5,13 @@ import Home from "../components/LandingComponents/Home";
 import About from "../components/LandingComponents/About";
 import ContactUs from "../components/LandingComponents/ContactUs";
 import Dashboard from "../components/AfterLogin/DashboardFolder/Dashboard";
-import Bills from "../components/AfterLogin/Bills";
+import Bills from "../components/Bills/Bills";
 import Customers from "../components/AfterLogin/Customers";
 import Products from "../components/AfterLogin/Products";
 import Account from "../components/AfterLogin/Account";
 import { userLog } from "../Redux/Actions/logActions";
+import SweetAlert from "react-bootstrap-sweetalert";
+import BillsView from "../components/AfterLogin/BillsView";
 
 const NavBar = (props) => {
   const dispatch = useDispatch();
@@ -17,7 +19,7 @@ const NavBar = (props) => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     dispatch(userLog());
-    alert("successfully logged out");
+    <SweetAlert title="successfully logged out"></SweetAlert>;
     props.history.push("/");
   };
 
@@ -40,7 +42,9 @@ const NavBar = (props) => {
           <div className="nav">
             <Link to="/dashboard">DashBoard</Link>|
             <Link to="/customers">Customers</Link>|
-            <Link to="/products">Products</Link>|<Link to="/bills">Bills</Link>|
+            <Link to="/products">Products</Link>|
+            <Link to="/billsview">Bills View</Link>|
+            <Link to="/bills">Generate Bills</Link>|
             <Link to="/account">Account</Link>|
             <Link onClick={handleLogout} to="/logout">
               Logout
@@ -60,6 +64,7 @@ const NavBar = (props) => {
         <Route path="/dashboard" component={Dashboard} exact={true} />
         <Route path="/bills" component={Bills} />
         <Route path="/customers" component={Customers} />
+        <Route path="/billsView" component={BillsView} />
         <Route path="/products" component={Products} />
         <Route path="/account" component={Account} />
       </div>

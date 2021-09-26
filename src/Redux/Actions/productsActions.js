@@ -1,4 +1,5 @@
 import axios from "axios";
+import SweetAlert from "react-bootstrap-sweetalert";
 
 export const productsData = (data) => {
   return {
@@ -24,10 +25,16 @@ export const startGettingProducts = () => {
       })
       .then((response) => {
         dispatch(productsData(response.data));
+
         console.log(response.data);
       })
       .catch((err) => {
-        alert(err.message);
+        <SweetAlert
+          title="Good job!"
+          text={err.message}
+          icon="Danger"
+          button="Aww yiss!"
+        ></SweetAlert>;
       });
   };
 };
@@ -43,10 +50,24 @@ export const startPostingProducts = (prodData) => {
       })
       .then((response) => {
         dispatch(addingProducts(response.data));
-        console.log(response.data);
+        <SweetAlert
+          title="Good job!"
+          text="successfully added"
+          icon="Success"
+          button="Aww yiss!"
+        >
+          Success
+        </SweetAlert>;
       })
       .catch((err) => {
-        alert(err.message);
+        <SweetAlert
+          title="Good job!"
+          text={err.message}
+          icon="Danger"
+          button="Aww yiss!"
+        >
+          Error
+        </SweetAlert>;
       });
   };
 };

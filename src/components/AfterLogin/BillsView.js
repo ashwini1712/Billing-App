@@ -1,7 +1,7 @@
 import React from "react";
 
-const Bills = () => {
+const BillsView = () => {
   return <div>Bills</div>;
 };
 
-export default Bills;
+export default BillsView;

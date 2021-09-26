@@ -1,4 +1,5 @@
 import axios from "axios";
+import SweetAlert from "react-bootstrap-sweetalert";
 
 export const startDelete = (data) => {
   return (dispatch) => {
@@ -15,7 +16,12 @@ export const startDelete = (data) => {
         console.log(response.data);
       })
       .catch((err) => {
-        alert(err.message);
+        <SweetAlert
+          title="Good job!"
+          text={err.message}
+          icon="Danger"
+          button="Aww yiss!"
+        ></SweetAlert>;
       });
   };
 };
@@ -29,10 +35,24 @@ export const startProdDelete = (data) => {
         },
       })
       .then((response) => {
-        console.log(response.data);
+        <SweetAlert
+          title="Good job!"
+          text="deleted"
+          icon="Danger"
+          button="Aww yiss!"
+        >
+          deleted
+        </SweetAlert>;
       })
       .catch((err) => {
-        alert(err.message);
+        <SweetAlert
+          title="Good job!"
+          text={err.message}
+          icon="Danger"
+          button="Aww yiss!"
+        >
+          deleted
+        </SweetAlert>;
       });
   };
 };
@@ -49,7 +69,12 @@ export const startBillDelete = (data) => {
         console.log(response.data);
       })
       .catch((err) => {
-        alert(err.message);
+        <SweetAlert
+          title="Good job!"
+          text={err.message}
+          icon="Danger"
+          button="Aww yiss!"
+        ></SweetAlert>;
       });
   };
 };

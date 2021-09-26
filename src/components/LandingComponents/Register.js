@@ -55,45 +55,46 @@ const Register = (props) => {
       <h1>Register with us</h1>
       <form onSubmit={handleRegister}>
         <input
+          className="form-control"
           type="text"
           placeholder="Enter username"
           onChange={handleName}
           value={userName}
-          required={true}
         />
         <br />
         <input
+          className="form-control"
           type="text"
           placeholder="Enter email"
           onChange={handleEmail}
           value={email}
-          required={true}
         />
         <br />
         <input
+          className="form-control"
           type="password"
           placeholder="Enter password"
           onChange={handlePassword}
           value={password}
-          required={true}
         />
         <br />
         <input
+          className="form-control"
           type="text"
           placeholder="Enter businessName"
           onChange={handleBusinessName}
           value={businessName}
-          required={true}
         />
         <br />
         <textarea
+          className="form-control"
           type="text"
           placeholder="Enter address"
           onChange={handleAddress}
           value={address}
         ></textarea>
         <br />
-        <input type="submit" value="Register" />
+        <input className="form-control" type="submit" value="Register" />
       </form>
     </div>
   );

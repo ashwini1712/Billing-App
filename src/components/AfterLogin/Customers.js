@@ -11,7 +11,6 @@ const Customers = () => {
     return state.customers;
   });
 
-  console.log(customers);
 
   const handleDelete = (ele) => {
     const result = window.confirm("Are you sure");
@@ -78,9 +77,7 @@ const Customers = () => {
           );
         })}
       </table>
-      {custModal ? (
-        <ModalView name="Name" mobile="Mobile" email="Email" />
-      ) : null}
+      {custModal ? <ModalView custModal={custModal} /> : null}
     </div>
   );
 };
