@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "reactstrap";
+import { startPostingBills } from "../../../Redux/Actions/billsActions";
 import { deleteFromCart } from "../../../Redux/Actions/cartActions";
 
 const Cart = ({ productsData }) => {
@@ -13,8 +14,13 @@ const Cart = ({ productsData }) => {
     dispatch(deleteFromCart(ele));
   };
 
+  const generateBill = () => {
+    console.log("generateBill", productsData);
+    dispatch(startPostingBills(productsData));
+  };
+
   return (
-    <div className="container-fluid" style={{ width: "50vh" }}>
+    <div className="container-fluid" style={{ width: "40vh" }}>
       {cart.map((prod) => {
         return (
           <div className="card">
@@ -36,6 +42,7 @@ const Cart = ({ productsData }) => {
           </div>
         );
       })}
+      <Button onClick={generateBill}>Generate Bill</Button>
     </div>
   );
 };

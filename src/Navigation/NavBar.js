@@ -11,7 +11,7 @@ import Products from "../components/AfterLogin/Products";
 import Account from "../components/AfterLogin/Account";
 import { userLog } from "../Redux/Actions/logActions";
 import SweetAlert from "react-bootstrap-sweetalert";
-import BillsView from "../components/AfterLogin/BillsView";
+import BillsView from "../components/Bills/BillsView";
 
 const NavBar = (props) => {
   const dispatch = useDispatch();

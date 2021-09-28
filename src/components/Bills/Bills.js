@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { billsData, startGettingBills } from "../../Redux/Actions/billsActions";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Cart from "../AfterLogin/Cart/Cart";
@@ -14,10 +13,6 @@ const Bills = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [customer, setCustomer] = useState([]);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(startGettingBills(billsData()));
-  }, [dispatch]);
 
   const customers = useSelector((state) => {
     return state.customers;
