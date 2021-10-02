@@ -1,5 +1,5 @@
 import axios from "axios";
-import SweetAlert from "react-bootstrap-sweetalert";
+import swal from "sweetalert";
 
 export const customersData = (data) => {
   return {
@@ -26,14 +26,7 @@ export const startGettingCustomers = () => {
       .then((response) => {
         dispatch(customersData(response.data));
       })
-      .catch((err) => {
-        <SweetAlert
-          title="Good job!"
-          text="You clicked the button!"
-          icon="success"
-          button="Aww yiss!"
-        ></SweetAlert>;
-      });
+      .catch((err) => {});
   };
 };
 
@@ -47,15 +40,20 @@ export const startPostingCustomers = (custData) => {
       })
       .then((response) => {
         dispatch(addingCustomers(response.data));
-        console.log(response.data);
+        swal({
+          title: "Good job!",
+          text: "Successfully Added",
+          icon: "success",
+          button: "ok",
+        });
       })
       .catch((err) => {
-        <SweetAlert
-          title="Good job!"
-          text={err.message}
-          icon="success"
-          button="Aww yiss!"
-        ></SweetAlert>;
+        swal({
+          title: "Error",
+          text: `${err.message}`,
+          icon: "error",
+          button: "ok",
+        });
       });
   };
 };

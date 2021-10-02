@@ -15,7 +15,6 @@ const Cart = ({ productsData }) => {
   };
 
   const generateBill = () => {
-    console.log("generateBill", productsData);
     dispatch(startPostingBills(productsData));
   };
 
@@ -26,8 +25,7 @@ const Cart = ({ productsData }) => {
           <div className="card">
             <p key={prod._id}>{prod.name}</p>
             <div className="card-body">
-              <Button style={{ backgroundColor: "red" }}>-</Button>
-              Qty
+              <Button style={{ backgroundColor: "red" }}>-</Button>1
               <Button style={{ backgroundColor: "green" }}>+</Button>
               <button
                 onClick={() => {

@@ -10,16 +10,22 @@ import Customers from "../components/AfterLogin/Customers";
 import Products from "../components/AfterLogin/Products";
 import Account from "../components/AfterLogin/Account";
 import { userLog } from "../Redux/Actions/logActions";
-import SweetAlert from "react-bootstrap-sweetalert";
+import swal from "sweetalert";
 import BillsView from "../components/Bills/BillsView";
 
 const NavBar = (props) => {
+  console.log("navba", props);
   const dispatch = useDispatch();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     dispatch(userLog());
-    <SweetAlert title="successfully logged out"></SweetAlert>;
+    swal({
+      title: "Logout",
+      text: "Successfully Logged Out!",
+      icon: "success",
+      button: "ok",
+    });
     props.history.push("/");
   };
 

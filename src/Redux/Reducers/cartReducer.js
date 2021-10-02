@@ -8,6 +8,9 @@ const cartReducer = (state = initialCart, action) => {
     case "DELETE_FROM_CART": {
       return [!action.payload];
     }
+    case "CLEAR_CART": {
+      return [];
+    }
     default: {
       return state;
     }

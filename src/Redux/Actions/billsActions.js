@@ -1,5 +1,6 @@
 import axios from "axios";
-import SweetAlert from "react-bootstrap-sweetalert";
+import { clearCart } from "./cartActions";
+import swal from "sweetalert";
 
 export const billsData = (data) => {
   return {
@@ -26,14 +27,7 @@ export const startGettingBills = () => {
       .then((response) => {
         dispatch(billsData(response.data));
       })
-      .catch((err) => {
-        <SweetAlert
-          title="Good job!"
-          text="You clicked the button!"
-          icon="error"
-          button="ok!"
-        ></SweetAlert>;
-      });
+      .catch((err) => {});
   };
 };
 
@@ -47,15 +41,21 @@ export const startPostingBills = (custData) => {
       })
       .then((response) => {
         dispatch(addingBills(response.data));
-        console.log(response.data);
+        swal({
+          title: "Good job!",
+          text: "Generated Bill",
+          icon: "success",
+          button: "ok",
+        });
+        dispatch(clearCart());
       })
       .catch((err) => {
-        <SweetAlert
-          title="Good job!"
-          text="You clicked the button!"
-          icon="success"
-          button="Aww yiss!"
-        ></SweetAlert>;
+        swal({
+          title: "Error",
+          text: `${err.message}`,
+          icon: "error",
+          button: "ok",
+        });
       });
   };
 };

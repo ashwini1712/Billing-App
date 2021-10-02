@@ -1,13 +1,19 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { startGettingBills } from "../../../Redux/Actions/billsActions";
 import { startGettingCustomers } from "../../../Redux/Actions/customersAction";
 import { startGettingProducts } from "../../../Redux/Actions/productsActions";
+import PieChart from "./PieChart";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
 
   const customers = useSelector((state) => {
     return state.customers;
+  });
+
+  const bills = useSelector((state) => {
+    return state.bills;
   });
 
   const products = useSelector((state) => {
@@ -17,10 +23,12 @@ const Dashboard = () => {
   useEffect(() => {
     dispatch(startGettingCustomers());
     dispatch(startGettingProducts());
+    dispatch(startGettingBills());
   }, []);
 
   return (
     <div>
+      <PieChart bills={bills} />
       <div
         className="d-flex"
         style={{ justifyContent: "space-between", margin: 80 }}
@@ -115,7 +123,7 @@ const Dashboard = () => {
             Bills Generated
           </div>
           <div>
-            <h1>{customers.length}</h1>
+            <h1>{bills.length}</h1>
           </div>
         </div>
         <div

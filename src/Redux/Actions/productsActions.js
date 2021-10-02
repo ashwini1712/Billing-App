@@ -1,6 +1,5 @@
 import axios from "axios";
-import SweetAlert from "react-bootstrap-sweetalert";
-
+import swal from "sweetalert";
 export const productsData = (data) => {
   return {
     type: "PRODUCTS_DATA",
@@ -29,12 +28,12 @@ export const startGettingProducts = () => {
         console.log(response.data);
       })
       .catch((err) => {
-        <SweetAlert
-          title="Good job!"
-          text={err.message}
-          icon="Danger"
-          button="Aww yiss!"
-        ></SweetAlert>;
+        // <SweetAlert
+        //   title="Good job!"
+        //   text={err.message}
+        //   icon="Danger"
+        //   button="Aww yiss!"
+        // ></SweetAlert>;
       });
   };
 };
@@ -50,24 +49,20 @@ export const startPostingProducts = (prodData) => {
       })
       .then((response) => {
         dispatch(addingProducts(response.data));
-        <SweetAlert
-          title="Good job!"
-          text="successfully added"
-          icon="Success"
-          button="Aww yiss!"
-        >
-          Success
-        </SweetAlert>;
+        swal({
+          title: "Good job!",
+          text: "Successfully added",
+          icon: "success",
+          button: "ok",
+        });
       })
       .catch((err) => {
-        <SweetAlert
-          title="Good job!"
-          text={err.message}
-          icon="Danger"
-          button="Aww yiss!"
-        >
-          Error
-        </SweetAlert>;
+        swal({
+          title: "Error",
+          text: `${err.message}`,
+          icon: "error",
+          button: "ok",
+        });
       });
   };
 };

@@ -1,9 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { billsData, startGettingBills } from "../../Redux/Actions/billsActions";
 import { Button } from "reactstrap";
+import BillsModal from "./BillsModal";
 
 const BillsView = () => {
+  const [billMod, setBillMod] = useState(false);
+  const [billCustProd, setBillCustProd] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,9 +21,14 @@ const BillsView = () => {
     return state.customers;
   });
 
+  const handleView = (ele) => {
+    setBillMod(true);
+    setBillCustProd(ele);
+  };
+
   return (
     <div>
-      <h1>Customers</h1>
+      <h1>Bills</h1>
       {/* <Button onClick={handleAddingCust}>Add New Customer</Button> */}
       <table className="table table-striped table-bordered table-hover table-condensed">
         <thead>
@@ -42,13 +50,19 @@ const BillsView = () => {
             <tbody key={ele._id}>
               <tr>
                 <td>{i + 1}</td>
-                {cusName.map((ele) => {
-                  return <td key={ele._id}>{ele.name}</td>;
+                {cusName.map((element) => {
+                  return <td key={element._id}>{element.name}</td>;
                 })}
                 <td>{ele.date}</td>
                 <td>{ele.total}</td>
                 <td>
-                  <Button>View</Button>
+                  <Button
+                    onClick={() => {
+                      handleView(ele);
+                    }}
+                  >
+                    View
+                  </Button>
                 </td>
                 <td>
                   <div
@@ -78,6 +92,7 @@ const BillsView = () => {
           );
         })}
       </table>
+      {billMod ? <BillsModal billCustProd={billCustProd} /> : null}
     </div>
   );
 };

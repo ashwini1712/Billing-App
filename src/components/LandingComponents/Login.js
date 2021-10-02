@@ -3,8 +3,10 @@ import { useDispatch } from "react-redux";
 import { startPostLogin } from "../../Redux/Actions/loginActions";
 import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
 import Register from "./Register";
+import { withRouter } from "react-router";
 
 const Login = (props) => {
+  console.log("his", props);
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
@@ -67,4 +69,4 @@ const Login = (props) => {
   );
 };
 
-export default Login;
+export default withRouter(Login);

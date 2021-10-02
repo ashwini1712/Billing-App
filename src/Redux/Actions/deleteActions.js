@@ -1,5 +1,4 @@
 import axios from "axios";
-import SweetAlert from "react-bootstrap-sweetalert";
 
 export const startDelete = (data) => {
   return (dispatch) => {
@@ -15,14 +14,7 @@ export const startDelete = (data) => {
       .then((response) => {
         console.log(response.data);
       })
-      .catch((err) => {
-        <SweetAlert
-          title="Good job!"
-          text={err.message}
-          icon="Danger"
-          button="Aww yiss!"
-        ></SweetAlert>;
-      });
+      .catch((err) => {});
   };
 };
 
@@ -34,26 +26,8 @@ export const startProdDelete = (data) => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
-      .then((response) => {
-        <SweetAlert
-          title="Good job!"
-          text="deleted"
-          icon="Danger"
-          button="Aww yiss!"
-        >
-          deleted
-        </SweetAlert>;
-      })
-      .catch((err) => {
-        <SweetAlert
-          title="Good job!"
-          text={err.message}
-          icon="Danger"
-          button="Aww yiss!"
-        >
-          deleted
-        </SweetAlert>;
-      });
+      .then((response) => {})
+      .catch((err) => {});
   };
 };
 
@@ -68,13 +42,6 @@ export const startBillDelete = (data) => {
       .then((response) => {
         console.log(response.data);
       })
-      .catch((err) => {
-        <SweetAlert
-          title="Good job!"
-          text={err.message}
-          icon="Danger"
-          button="Aww yiss!"
-        ></SweetAlert>;
-      });
+      .catch((err) => {});
   };
 };
