@@ -47,7 +47,7 @@ export const startPostingBills = (custData) => {
           icon: "success",
           button: "ok",
         });
-        dispatch(clearCart());
+        // dispatch(clearCart());
       })
       .catch((err) => {
         swal({

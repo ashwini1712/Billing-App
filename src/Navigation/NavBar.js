@@ -44,7 +44,8 @@ const NavBar = (props) => {
             Sarvagya
           </a>
         </div>
-        {localStorage.length > 0 ? (
+        {localStorage.length > 0 &&
+        localStorage.getItem("token") !== undefined ? (
           <div className="nav">
             <Link to="/dashboard">DashBoard</Link>|
             <Link to="/customers">Customers</Link>|

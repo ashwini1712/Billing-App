@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PDF from "./Pdf";
+import { clearCart } from "../../Redux/Actions/cartActions";
 
 const BillsModal = ({ billCustProd }) => {
+  const dispatch = useDispatch();
+  console.log("billscustprod", billCustProd);
   const [popUp, setPopUp] = useState(true);
   const toggle = () => {
     setPopUp(!popUp);
+    dispatch(clearCart());
   };
 
   const customer = useSelector((state) => {
@@ -17,20 +21,12 @@ const BillsModal = ({ billCustProd }) => {
     return state.products;
   });
 
-  console.log(billCustProd.lineItems[0].product);
-
   const cusFilter = customer.filter((ele) => {
     return ele._id === billCustProd.customer;
   });
 
   const lineItems = billCustProd.lineItems;
 
-  // const productFilter = product.filter((ele) => {
-  //   lineItems.map((eleLine, i) => {
-  //     console.log("inside line", eleLine);
-  //     return ele._id === eleLine.product;
-  //   });
-  // });
   const productFilter = [];
   for (let i = 0; i < product.length; i++) {
     for (let j = 0; j < lineItems.length; j++) {

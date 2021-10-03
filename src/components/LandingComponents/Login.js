@@ -6,7 +6,6 @@ import Register from "./Register";
 import { withRouter } from "react-router";
 
 const Login = (props) => {
-  console.log("his", props);
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");

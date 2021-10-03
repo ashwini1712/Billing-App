@@ -54,3 +54,34 @@ export const startPostRegister = (data, props) => {
       });
   };
 };
+
+export const startGettingAccount = () => {
+  return () => {
+    axios
+      .get("http://dct-billing-app.herokuapp.com/api/users/account", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log("account", response.data);
+        const result = response.data;
+        if (result.hasOwnProperty("errors")) {
+          swal({
+            title: "Error",
+            text: `${result.message}`,
+            icon: "error",
+            button: "ok",
+          });
+        } else {
+          swal({
+            title: "Good job!",
+            text: "Registered with us",
+            icon: "success",
+            button: "Aww yiss!",
+          });
+        }
+      });
+  };
+};

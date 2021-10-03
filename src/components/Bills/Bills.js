@@ -75,109 +75,123 @@ const Bills = () => {
 
   return (
     <div>
-      <div className="card" style={{ margin: 10 }}>
-        <div
-          className="card"
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "ThreeDLightShadow",
-            color: "white",
-          }}
-        >
-          <Button
-            style={{ backgroundColor: "goldenrod" }}
-            onClick={handleAddingCust}
-          >
-            Add New Customer
-          </Button>
-          <p>---------or---------</p>
-
-          {/* date time picker */}
-
-          <h4>Please select date and a Customer</h4>
-          <div className="card">
-            <DatePicker
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-            />
-          </div>
-          <select onChange={(e) => handleSelect(e)}>
-            {customers.map((cust) => {
-              return (
-                <option value={cust._id} key={cust._id}>
-                  {cust.name}
-                </option>
-              );
-            })}
-          </select>
-        </div>
-        {customer.length > 0 ? (
+      <div className="d-flex">
+        <div className="card" style={{ margin: 10, width: "150vh" }}>
           <div
             className="card"
             style={{
+              justifyContent: "center",
+              alignItems: "center",
               backgroundColor: "ThreeDLightShadow",
               color: "white",
-              marginTop: "20px",
             }}
           >
-            <div style={{ justifyContent: "center", alignItems: "center" }}>
-              <Button
-                style={{ backgroundColor: "goldenrod" }}
-                onClick={handleAddingProd}
-              >
-                Add Product
-              </Button>
-              <p>---------or---------</p>
-              <h4>Please select products </h4>
-              <div
-                className="row row-cols-5"
-                style={{
-                  height: "300px",
-                  overflowY: "scroll",
-                  overflowX: "scroll",
-                }}
-              >
-                {products.map((prod) => {
-                  return (
-                    <div
-                      className="card"
-                      key={prod._id}
-                      style={{
-                        justifyContent: "center",
-                        textAlign: "center",
-                        backgroundColor: "darkgoldenrod",
-                        height: "160px",
-                        overflow: "hidden",
-                        margin: "10px",
-                      }}
-                    >
-                      <div>
-                        <h5>{prod.name}</h5>
-                        <hr />
-                        <p>{prod.price}</p>
-                        <Button
-                          style={{ backgroundColor: "goldenrod" }}
-                          onClick={() => {
-                            handleAdd(prod);
-                          }}
-                        >
-                          Add
-                        </Button>
+            <Button
+              style={{ backgroundColor: "goldenrod" }}
+              onClick={handleAddingCust}
+            >
+              Add New Customer
+            </Button>
+            <p>---------or---------</p>
+
+            {/* date time picker */}
+
+            <h4>Please select date and a Customer</h4>
+            <div className="card">
+              <DatePicker
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+              />
+            </div>
+            <select onChange={(e) => handleSelect(e)}>
+              {customers.map((cust) => {
+                return (
+                  <option value={cust._id} key={cust._id}>
+                    {cust.name}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          {customer.length > 0 ? (
+            <div
+              className="card"
+              style={{
+                backgroundColor: "ThreeDLightShadow",
+                color: "white",
+                marginTop: "20px",
+              }}
+            >
+              <div style={{ justifyContent: "center", alignItems: "center" }}>
+                <Button
+                  style={{ backgroundColor: "goldenrod" }}
+                  onClick={handleAddingProd}
+                >
+                  Add Product
+                </Button>
+                <p>---------or---------</p>
+                <h4>Please select products </h4>
+                <div
+                  className="row row-cols-5"
+                  style={{
+                    height: "300px",
+                    overflowY: "scroll",
+                    overflowX: "scroll",
+                  }}
+                >
+                  {products.map((prod) => {
+                    return (
+                      <div
+                        className="card"
+                        key={prod._id}
+                        style={{
+                          justifyContent: "center",
+                          textAlign: "center",
+                          backgroundColor: "darkgoldenrod",
+                          height: "160px",
+                          overflow: "hidden",
+                          margin: "10px",
+                        }}
+                      >
+                        <div>
+                          <h5>{prod.name}</h5>
+                          <hr />
+                          <p>{prod.price}</p>
+                          <Button
+                            style={{ backgroundColor: "goldenrod" }}
+                            onClick={() => {
+                              handleAdd(prod);
+                            }}
+                          >
+                            Add
+                          </Button>
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
             </div>
-          </div>
-        ) : null}
+          ) : null}
+        </div>
+        <div style={{ width: "40vh", height: "100px" }}>
+          {cart.length === 0 ? (
+            <div
+              className="card"
+              style={{
+                justifyContent: "center",
+                alignItems: "center",
+                width: "40vh",
+                height: "450px",
+              }}
+            >
+              Cart is empty please select products
+            </div>
+          ) : (
+            <Cart productsData={addBill} />
+          )}
+        </div>
       </div>
-      {cart.length === 0 ? (
-        <div className="card">Cart is empty</div>
-      ) : (
-        <Cart productsData={addBill} />
-      )}
       {prodModal ? <ModalView prodModal={prodModal} /> : null}
       {custModal ? <ModalView custModal={custModal} /> : null}
     </div>
