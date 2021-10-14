@@ -102,7 +102,13 @@ const Cart = ({ productsData }) => {
       </div>
       <div>
         <Button onClick={generateBill}>Generate Bill</Button>
-        {view ? <BillsModal billCustProd={productsData} /> : null}
+        {view ? (
+          <BillsModal
+            billCustProd={productsData}
+            billMod={view}
+            setBillMod={setView}
+          />
+        ) : null}
       </div>
     </div>
   );

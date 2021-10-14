@@ -1,6 +1,5 @@
 import React from "react";
 import Pdf from "react-to-pdf";
-import BillsModal from "./BillsModal";
 
 const ref = React.createRef();
 

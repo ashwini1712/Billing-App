@@ -1,6 +1,5 @@
 import React from "react";
 import Login from "./Login";
-import { Button } from "reactstrap";
 
 const Home = () => {
   return (
@@ -19,7 +18,6 @@ const Home = () => {
             software with GST, small businesses can keep their accounts and
             books updated....
           </p>
-          <Button style={{ backgroundColor: "green" }}>Learn More</Button>
         </div>
         <div
           className="card"

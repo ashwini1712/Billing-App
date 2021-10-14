@@ -24,7 +24,7 @@ const Dashboard = () => {
     dispatch(startGettingCustomers());
     dispatch(startGettingProducts());
     dispatch(startGettingBills());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>
@@ -93,59 +93,10 @@ const Dashboard = () => {
               width: "300px",
             }}
           >
-            Recent Activity
-          </div>
-          <div>
-            <h1>{customers.length}</h1>
-          </div>
-        </div>
-      </div>
-      <div
-        className="d-flex"
-        style={{ justifyContent: "space-around", margin: 80 }}
-      >
-        <div
-          className="card"
-          style={{
-            width: "300px",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <div
-            className="card"
-            style={{
-              alignItems: "center",
-              justifyContent: "center",
-              width: "300px",
-            }}
-          >
             Bills Generated
           </div>
           <div>
             <h1>{bills.length}</h1>
-          </div>
-        </div>
-        <div
-          className="card"
-          style={{
-            width: "300px",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <div
-            className="card"
-            style={{
-              alignItems: "center",
-              justifyContent: "center",
-              width: "300px",
-            }}
-          >
-            Download Invoice/Bill
-          </div>
-          <div>
-            <h1>{customers.length}</h1>
           </div>
         </div>
       </div>

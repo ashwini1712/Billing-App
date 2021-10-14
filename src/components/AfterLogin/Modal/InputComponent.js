@@ -7,7 +7,7 @@ function InputComponent(props) {
     <div className="card">
       <label htmlFor={name}> {label}</label>
       <Field name={name} {...rest} />
-      <ErrorMessage style={{ backgroundColor: "red" }} name={name} />
+      <ErrorMessage style={{ color: "red" }} name={name} />
     </div>
   );
 }

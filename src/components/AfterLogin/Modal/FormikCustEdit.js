@@ -5,12 +5,12 @@ import FormikCase from "./FormikCase";
 import { useDispatch } from "react-redux";
 import { startPostingCustomers } from "../../../Redux/Actions/customersAction";
 
-function FormikContainer(props) {
+function FormikCustEdit({ editModal }) {
   const dispatch = useDispatch();
   const initialValues = {
-    name: "",
-    email: "",
-    mobile: "",
+    name: editModal.name,
+    email: editModal.email,
+    mobile: editModal.mobile,
   };
   const validationSchema = Yup.object({
     name: Yup.string().min(5).required("Required"),
@@ -32,16 +32,16 @@ function FormikContainer(props) {
           <FormikCase control="input" type="name" label="Name" name="name" />
           <FormikCase
             control="input"
-            type="string"
+            type="mobile"
             label="Mobile"
             name="mobile"
           />
           <button type="submit" className="btn btn-success">
-            Add Customer
+            Save
           </button>
         </Form>
       )}
     </Formik>
   );
 }
-export default FormikContainer;
+export default FormikCustEdit;

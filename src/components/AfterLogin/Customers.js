@@ -1,18 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "reactstrap";
 import ComboBox from "react-responsive-combo-box";
 import { startDelete } from "../../Redux/Actions/deleteActions";
 import ModalView from "./Modal/ModalView";
+import { startGettingCustomers } from "../../Redux/Actions/customersAction";
+import PaginationCompo from "./Modal/Pagination";
 
 const Customers = () => {
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(startGettingCustomers());
+  }, [dispatch]);
 
   const [custModal, setCustModal] = useState(false);
   const [search, setSearch] = useState("");
   const [combo, setCombo] = useState("");
+  const [editCust, setEditCust] = useState([]);
+  const [editCustModal, setEditCustModal] = useState(false);
+  const [customers, setCustomers] = useState([]);
+  const [showPerPage, setShowPerPage] = useState(9);
+  const [page, setPage] = useState({
+    start: 0,
+    end: showPerPage,
+  });
 
-  const customers = useSelector((state) => {
+  const customer = useSelector((state) => {
     return state.customers;
   });
 
@@ -24,7 +37,8 @@ const Customers = () => {
   };
 
   const handleEdit = (ele) => {
-    console.log(ele);
+    setEditCust(ele);
+    setEditCustModal(!editCustModal);
   };
 
   const handleAddingCust = () => {
@@ -33,17 +47,36 @@ const Customers = () => {
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
+    const searchCust = customer.filter((ele) => {
+      if (ele.name.includes(search)) {
+        return ele;
+      } else return;
+    });
+    setCustomers(searchCust);
   };
 
   const options = ["a-z", "z-a"];
 
-  console.log("search", search);
+  const handleSelect = (option) => {
+    setCombo(option);
+
+    setCustomers(
+      customer.sort((a, b) => {
+        return a === b ? 0 : a > b ? 1 : -1;
+      })
+    );
+  };
+
+  const onPaginationChange = (start, end) => {
+    setPage({ start, end });
+  };
 
   return (
     <div>
       <h1>Customers</h1>
       <div className="d-flex" style={{ justifyContent: "space-between" }}>
         <Button onClick={handleAddingCust}>Add New Customer</Button>
+        <div style={{ fontSize: 20 }}></div>
         <input
           type="text"
           value={search}
@@ -54,7 +87,6 @@ const Customers = () => {
         <ComboBox
           options={options}
           placeholder="Order By"
-          defaultIndex={4}
           optionsListMaxHeight={300}
           style={{
             width: "200px",
@@ -64,10 +96,10 @@ const Customers = () => {
           renderOptions={(option) => (
             <div className="comboBoxOption">{option}</div>
           )}
-          onSelect={(option) => setCombo(option)}
-          // onChange={(event) => console.log(event.target.value)}
+          onSelect={(option) => {
+            handleSelect(option);
+          }}
           enableAutocomplete
-          // onOptionsChange={(option) => setCombo(option)}
         />
       </div>
       <table className="table table-striped table-bordered table-hover table-condensed">
@@ -80,43 +112,91 @@ const Customers = () => {
             <th>Crud Operations</th>
           </tr>
         </thead>
-        {customers.map((ele, i) => {
-          return (
-            <tbody key={ele._id}>
-              <tr>
-                <td>{i + 1}</td>
-                <td>{ele.name}</td>
-                <td>{ele.mobile}</td>
-                <td>{ele.email}</td>
-                <td>
-                  <div
-                    style={{
-                      justifyContent: "space-around",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Button
-                      onClick={() => {
-                        handleEdit(ele);
-                      }}
-                    >
-                      Edit
-                    </Button>
-                    <Button
-                      onClick={() => {
-                        handleDelete(ele);
-                      }}
-                    >
-                      Delete
-                    </Button>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          );
-        })}
+        {customers.length > 0
+          ? customers.slice(page.start, page.end).map((ele, i) => {
+              return (
+                <tbody key={ele._id}>
+                  <tr>
+                    <td>{i + 1}</td>
+                    <td>{ele.name}</td>
+                    <td>{ele.mobile}</td>
+                    <td>{ele.email}</td>
+                    <td>
+                      <div
+                        style={{
+                          justifyContent: "space-around",
+                          alignItems: "center",
+                        }}
+                      >
+                        <Button
+                          onClick={() => {
+                            handleEdit(ele);
+                          }}
+                        >
+                          Edit
+                        </Button>
+                        <Button
+                          onClick={() => {
+                            handleDelete(ele);
+                          }}
+                        >
+                          Delete
+                        </Button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              );
+            })
+          : customer.slice(page.start, page.end).map((ele, i) => {
+              return (
+                <tbody key={ele._id}>
+                  <tr>
+                    <td>{i + 1}</td>
+                    <td>{ele.name}</td>
+                    <td>{ele.mobile}</td>
+                    <td>{ele.email}</td>
+                    <td>
+                      <div
+                        style={{
+                          justifyContent: "space-around",
+                          alignItems: "center",
+                        }}
+                      >
+                        <Button
+                          onClick={() => {
+                            handleEdit(ele);
+                          }}
+                        >
+                          Edit
+                        </Button>
+                        <Button
+                          onClick={() => {
+                            handleDelete(ele);
+                          }}
+                        >
+                          Delete
+                        </Button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              );
+            })}
       </table>
       {custModal ? <ModalView custModal={custModal} /> : null}
+      {editCust && editCustModal ? (
+        <ModalView
+          editCust={editCust}
+          editCustModal={editCustModal}
+          custModal={custModal}
+        />
+      ) : null}
+      <PaginationCompo
+        showPerPage={showPerPage}
+        onPaginationChange={onPaginationChange}
+        cust={customer}
+      />
     </div>
   );
 };

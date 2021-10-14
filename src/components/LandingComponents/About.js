@@ -7,7 +7,7 @@ const About = () => {
       <br />
       <p style={{ fontSize: 20 }}>
         <i>
-          <b style={{ color: "darkblue" }}>Sarvagya</b>
+          <b style={{ color: "darkblue" }}>BillingApp</b>
         </i>{" "}
         is a
         <i>

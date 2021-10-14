@@ -1,16 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 import ModalView from "./Modal/ModalView";
 import { startProdDelete } from "../../Redux/Actions/deleteActions";
+import { startGettingProducts } from "../../Redux/Actions/productsActions";
 
 const Products = () => {
   const [prodModal, setProdModal] = useState(false);
+  const [editModal, setEditModal] = useState([]);
+  const [editView, setEditView] = useState(false);
   const dispatch = useDispatch();
   const products = useSelector((state) => {
     return state.products;
   });
 
+  useEffect(() => {
+    dispatch(startGettingProducts());
+  }, [dispatch]);
 
   const handleDelete = (ele) => {
     const result = window.confirm("Are you sure");
@@ -20,7 +26,8 @@ const Products = () => {
   };
 
   const handleEdit = (ele) => {
-    console.log(ele);
+    setEditView(true);
+    setEditModal(ele);
   };
 
   const handleAddingProd = () => {
@@ -78,6 +85,13 @@ const Products = () => {
         })}
       </table>
       {prodModal ? <ModalView prodModal={prodModal} /> : null}
+      {editView && editModal ? (
+        <ModalView
+          prodModal={prodModal}
+          editModal={editModal}
+          editView={editView}
+        />
+      ) : null}
     </div>
   );
 };

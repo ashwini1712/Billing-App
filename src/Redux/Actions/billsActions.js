@@ -27,7 +27,9 @@ export const startGettingBills = () => {
       .then((response) => {
         dispatch(billsData(response.data));
       })
-      .catch((err) => {});
+      .catch((err) => {
+        alert(err.message);
+      });
   };
 };
 

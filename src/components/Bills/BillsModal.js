@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import PDF from "./Pdf";
 import { clearCart } from "../../Redux/Actions/cartActions";
 
-const BillsModal = ({ billCustProd }) => {
+const BillsModal = (props) => {
+  const billCustProd = props.billCustProd;
+  const setBillMod = props.setBillMod;
+  const billMod = props.billMod;
   const dispatch = useDispatch();
   console.log("billscustprod", billCustProd);
-  const [popUp, setPopUp] = useState(true);
   const toggle = () => {
-    setPopUp(!popUp);
+    setBillMod(!billMod);
     dispatch(clearCart());
   };
 
@@ -40,7 +42,7 @@ const BillsModal = ({ billCustProd }) => {
 
   return (
     <div>
-      <Modal isOpen={popUp} toggle={toggle}>
+      <Modal isOpen={billMod} toggle={toggle}>
         <ModalHeader toggle={toggle}>
           Details of bill for {cusFilter[0].name}
         </ModalHeader>

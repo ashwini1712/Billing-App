@@ -3,7 +3,6 @@ import { Route, withRouter, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Home from "../components/LandingComponents/Home";
 import About from "../components/LandingComponents/About";
-import ContactUs from "../components/LandingComponents/ContactUs";
 import Dashboard from "../components/AfterLogin/DashboardFolder/Dashboard";
 import Bills from "../components/Bills/Bills";
 import Customers from "../components/AfterLogin/Customers";
@@ -40,9 +39,16 @@ const NavBar = (props) => {
         }}
       >
         <div className="navbar-header">
-          <a className="navbar-brand" href="/">
-            Sarvagya
-          </a>
+          {localStorage.length > 0 &&
+          localStorage.getItem("token") !== undefined ? (
+            <a className="navbar-brand" href="/dashboard">
+              BillingApp
+            </a>
+          ) : (
+            <a className="navbar-brand" href="/">
+              BillingApp
+            </a>
+          )}
         </div>
         {localStorage.length > 0 &&
         localStorage.getItem("token") !== undefined ? (
@@ -59,15 +65,14 @@ const NavBar = (props) => {
           </div>
         ) : (
           <div className="nav" style={{ justifyContent: "space-around" }}>
-            <Link to="/">Home</Link>|<Link to="/about">About</Link>|
-            <Link to="/countact"> Countact us </Link>
+            <Link to="/">Home</Link>|<Link to="/about">About</Link>
           </div>
         )}
       </div>
       <div className="card" style={{ height: "100vh" }}>
         <Route path="/" component={Home} exact={true} />
         <Route path="/about" component={About} />
-        <Route path="/contact" component={ContactUs} />
+
         <Route path="/dashboard" component={Dashboard} exact={true} />
         <Route path="/bills" component={Bills} />
         <Route path="/customers" component={Customers} />

@@ -92,7 +92,13 @@ const BillsView = () => {
           );
         })}
       </table>
-      {billMod ? <BillsModal billCustProd={billCustProd} /> : null}
+      {billMod ? (
+        <BillsModal
+          billCustProd={billCustProd}
+          billMod={billMod}
+          setBillMod={setBillMod}
+        />
+      ) : null}
     </div>
   );
 };

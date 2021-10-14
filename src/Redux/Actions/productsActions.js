@@ -9,7 +9,14 @@ export const productsData = (data) => {
 
 export const addingProducts = (data) => {
   return {
-    type: "PRODUCTS",
+    type: "ADDING_PRODUCTS",
+    payload: data,
+  };
+};
+
+export const updatingProducts = (data) => {
+  return {
+    type: "UPDATING_PRODUCTS",
     payload: data,
   };
 };
@@ -28,12 +35,12 @@ export const startGettingProducts = () => {
         console.log(response.data);
       })
       .catch((err) => {
-        // <SweetAlert
-        //   title="Good job!"
-        //   text={err.message}
-        //   icon="Danger"
-        //   button="Aww yiss!"
-        // ></SweetAlert>;
+        swal({
+          title: "Error",
+          text: `${err.message}`,
+          icon: "error",
+          button: "ok",
+        });
       });
   };
 };
@@ -44,11 +51,38 @@ export const startPostingProducts = (prodData) => {
       .post("http://dct-billing-app.herokuapp.com/api/products", prodData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
-          "content-Type": "application/json",
         },
       })
       .then((response) => {
         dispatch(addingProducts(response.data));
+        swal({
+          title: "Good job!",
+          text: "Successfully added",
+          icon: "success",
+          button: "ok",
+        });
+      })
+      .catch((err) => {
+        swal({
+          title: "Error",
+          text: `${err.message}`,
+          icon: "error",
+          button: "ok",
+        });
+      });
+  };
+};
+
+export const startUpdatingProducts = (prodData) => {
+  return (dispatch) => {
+    axios
+      .post("http://dct-billing-app.herokuapp.com/api/products", prodData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((response) => {
+        dispatch(updatingProducts(response.data));
         swal({
           title: "Good job!",
           text: "Successfully added",
