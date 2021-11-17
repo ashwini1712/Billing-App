@@ -10,7 +10,7 @@ import { addToCart } from "../../Redux/Actions/cartActions";
 const Bills = () => {
   const [prodModal, setProdModal] = useState(false);
   const [custModal, setCustModal] = useState(false);
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date.parse());
   const [customer, setCustomer] = useState([]);
   const dispatch = useDispatch();
 
@@ -100,7 +100,7 @@ const Bills = () => {
             <div className="card">
               <DatePicker
                 selected={startDate}
-                onChange={(date) => setStartDate(date)}
+                onChange={(date) => console.log(new Date.parse(date))}
               />
             </div>
             <select onChange={(e) => handleSelect(e)}>

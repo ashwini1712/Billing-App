@@ -48,10 +48,11 @@ const Customers = () => {
   const handleSearch = (e) => {
     setSearch(e.target.value);
     const searchCust = customer.filter((ele) => {
-      if (ele.name.includes(search)) {
+      if (ele.name.search(search)) {
         return ele;
-      } else return;
+      }
     });
+    console.log(searchCust);
     setCustomers(searchCust);
   };
 

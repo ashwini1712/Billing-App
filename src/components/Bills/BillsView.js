@@ -3,10 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { billsData, startGettingBills } from "../../Redux/Actions/billsActions";
 import { Button } from "reactstrap";
 import BillsModal from "./BillsModal";
+import DatePicker from "react-datepicker";
 
 const BillsView = () => {
   const [billMod, setBillMod] = useState(false);
   const [billCustProd, setBillCustProd] = useState([]);
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  const [billsNew, setBillsNew] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -17,6 +21,10 @@ const BillsView = () => {
     return state.bills;
   });
 
+  useEffect(() => {
+    setBillsNew(bills);
+  }, []);
+
   const customer = useSelector((state) => {
     return state.customers;
   });
@@ -26,9 +34,34 @@ const BillsView = () => {
     setBillCustProd(ele);
   };
 
+  console.log("bills", bills);
+
+  const filterBills = () => {
+    const NewBills = bills.filter((ele) => {
+      const newDateConverted = ele.date;
+      if (
+        new Date(newDateConverted) <= endDate &&
+        new Date(newDateConverted) >= startDate
+      ) {
+        return ele;
+      }
+    });
+    setBillsNew(NewBills);
+  };
+
+  console.log("newbills", billsNew);
+
   return (
     <div>
       <h1>Bills</h1>
+      <DatePicker
+        selected={startDate}
+        onChange={(date) => setStartDate(date)}
+      />
+      <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} />
+      <button type="button" onClick={filterBills}>
+        Filter
+      </button>
       {/* <Button onClick={handleAddingCust}>Add New Customer</Button> */}
       <table className="table table-striped table-bordered table-hover table-condensed">
         <thead>
@@ -41,7 +74,8 @@ const BillsView = () => {
             <th>Crud Operations</th>
           </tr>
         </thead>
-        {bills.map((ele, i) => {
+
+        {billsNew.map((ele, i) => {
           const cusName = customer.filter((cus) => {
             return cus._id === ele.customer;
           });
